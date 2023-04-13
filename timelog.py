@@ -172,7 +172,7 @@ def binary_search(args: Namespace, chunksize: int, mem: mmap, time: bytes, m_beg
         # finally do a plain search in a relatively small area of chunksize
         # advancing search begin position to the half of chunk to avoid skipping some lines with the same matching time
         m_begin -= chunksize // 2
-        end = m_begin + m_size
+        end = m_begin + m_size + chunksize // 2
         mem.seek(m_begin, SEEK_SET)
         while mem.tell() < end:
             current_time = mem_extract_time(mem, end)
