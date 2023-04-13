@@ -20,7 +20,8 @@ Thus, I have written a script to perform this task efficiently. Essentially, it 
 
 ```
 $ ./timelog.py -h
-usage: timelog.py [-h] [-l] [-t TIME_TO] [-v] [-d] [-a ARG] [-n] [-c CHUNKSIZE] filename time_from
+usage: timelog.py [-h] [-l] [-t TIME_TO] [-v] [-d] [-a ARG] [-n] [-c CHUNKSIZE]
+                  filename time_from
 
 Perform a binary search for the specified time in a big text log file.
 Print found log lines to stdout by executing `dd` with proper args,
@@ -28,22 +29,25 @@ or view it with `less` with proper position on found time.
 
 positional arguments:
   filename              Path to the log file
-  time_from             Time string to search the first line in log file. Can be in one of the
-                        following formats: `YYYY/mm/dd HH:MM:SS:sss` (full), `YYYY/mm/dd HH:MM:SS`,
-                        `YYYY/mm/dd HH:MM` (short), `YY/mm/dd` (date only), `HH:MM:SS:sss`,
-                        `HH:MM:SS`, or `HH:MM` (time only, date from the first line of file)
+  time_from             Time string to search the first line in log file. Can be in one of
+                        the following formats: `YYYY/mm/dd HH:MM:SS:sss` (full), `YYYY/mm/dd
+                        HH:MM:SS`, `YYYY/mm/dd HH:MM` (short), `YY/mm/dd` (date only),
+                        `HH:MM:SS:sss`, `HH:MM:SS`, or `HH:MM` (time only, date from the
+                        first line of file)
 
 options:
   -h, --help            show this help message and exit
   -l, --less            Use `less` program to view the file instead of printing it with `dd`.
                         Conflicts with --time-to option (default: False)
   -t TIME_TO, --time-to TIME_TO
-                        Set the last time string to output from in log file, NOT INCLUSIVE. Conflicts
-                        with --less option. The same format as for time_from (default: None)
+                        Set the last time string to output from in log file, NOT INCLUSIVE.
+                        Conflicts with --less option. The same format as for time_from
+                        (default: None)
   -v, --verbose         Show debug info on stderr (default: False)
   -d, --debug           Debug binary search stages to stderr (default: False)
   -a ARG, --arg ARG     Add an extra argument to the resulting command line (default: None)
-  -n, --noexec          Do not execute resulting command, just print it to stdout (default: False)
+  -n, --noexec          Do not execute resulting command, just print it to stdout (default:
+                        False)
   -c CHUNKSIZE, --chunksize CHUNKSIZE
                         Max chunk size for linear search in file (default: 81920)
 
@@ -52,5 +56,4 @@ Examples of the resulting commands:
     dd status=none if=bigfile.log iflag=skip_bytes skip=2488818942
     dd status=none if=bigfile.log iflag=skip_bytes,count_bytes skip=2488818942 count=451258
     less -n +2488818942P bigfile.log
-
 ```
