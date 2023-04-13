@@ -177,7 +177,7 @@ def binary_search(args: Namespace, chunksize: int, mem: mmap, time: bytes, m_beg
         while mem.tell() < end:
             current_time = mem_extract_time(mem, end)
             pos = mem.tell()
-            debug_binsearch(args, "--- linear search:", time, pos, current_time)
+            debug_binsearch(args, '--- linear search:', time, pos, current_time)
             if current_time >= time:
                 return (True, pos)
             next_line = mem_skip_line_begin_right(mem, end)
@@ -189,7 +189,7 @@ def binary_search(args: Namespace, chunksize: int, mem: mmap, time: bytes, m_beg
     left_chunk_start = m_begin
     left_chunk_end = left_chunk_start + chunksize
     left_time = mem_extract_time(mem, left_chunk_end)
-    debug_binsearch(args, "--- binary search:", time, m_begin, m_size, "left_time:", left_time)
+    debug_binsearch(args, '--- binary search:', time, m_begin, m_size, 'left_time:', left_time)
     if not left_time:
         raise RuntimeError('failed to extract left_time')
     if time < left_time:
@@ -214,7 +214,7 @@ def binary_search(args: Namespace, chunksize: int, mem: mmap, time: bytes, m_beg
             mem.seek(pos - 1, SEEK_SET)
         else:
             break
-    debug_binsearch(args, "--- binary search:", time, m_begin, m_size, "right_time:", right_time)
+    debug_binsearch(args, '--- binary search:', time, m_begin, m_size, 'right_time:', right_time)
     if not right_time:
         raise RuntimeError('failed to extract right_time')
     if time > right_time:
@@ -232,7 +232,7 @@ def binary_search(args: Namespace, chunksize: int, mem: mmap, time: bytes, m_beg
     middle_line = mem_skip_line_begin_left(mem, middle_chunk_start)
     mem.seek(middle_line, SEEK_SET)
     middle_time = mem_extract_time(mem, middle_chunk_end)
-    debug_binsearch(args, "--- binary search:", time, m_begin, m_size, "middle_time:", middle_time)
+    debug_binsearch(args, '--- binary search:', time, m_begin, m_size, 'middle_time:', middle_time)
 
     if time == middle_time:
         return (True, mem.tell() - TIME_LEN)
@@ -295,7 +295,7 @@ def fix_time(mem: mmap, args: Namespace, time: str, prev_time: str) -> str:
             if not prev_time:
                 prev_time = mem_extract_time(mem, args.chunksize)
                 prev_time = prev_time.decode()
-            date = prev_time[:11] # for "YYYY/mm/dd "
+            date = prev_time[:11] # for 'YYYY/mm/dd '
             if TIME_RE.match(time):
                 fixed_time = date + time
             elif TIME_HMS_RE.match(time):
