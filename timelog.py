@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-__author__ = 'xhaskx@gmail.com'
+__author__ = 'Alexander Kiranov <xhaskx@gmail.com>'
 __source__ = 'https://github.com/xHasKx/timelog'
 
 import re
